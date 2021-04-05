@@ -261,6 +261,5 @@ def update_tables(wf1,weekfilter,agentfilter):
 
 
 
-
 if __name__ == '__main__':
     app.run_server(debug=True)
