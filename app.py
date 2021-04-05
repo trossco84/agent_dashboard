@@ -1,7 +1,3 @@
-#add christian logic
-#fix the drop downs
-#deploy to production
-
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -12,7 +8,7 @@ import plotly.express as px
 import dash_table as dtable
 
 #create data
-week_totals = pd.read_csv('/Users/trevorross/Desktop/My Projects/agent_dashboard_dev/raw_archives.csv')
+week_totals = pd.read_csv('https://raw.githubusercontent.com/trossco84/bettingatwork/main/raw_archives.csv')
 a_weeks = list(week_totals.Week.unique())[::-1]
 totals_columns=[{"name": i, "id": i} for i in week_totals.columns[1:]]
 last_week = a_weeks[0]
@@ -29,7 +25,7 @@ available_weeks = [{"label":x,"value":x} for x in a_weeks]
 
 def process_interbookie(ww2):
     #creates data frame for optimization
-    w2p = pd.read_csv(f'/Users/trevorross/Desktop/My Projects/agent_dashboard_dev/weekly_outputs/{ww2}.csv')
+    w2p = pd.read_csv(f'https://raw.githubusercontent.com/trossco84/bettingatwork/main/weekly_outputs/{ww2}.csv')
     w2p['Amount'] = np.where(w2p['Action']=='Pay',w2p['Amount']*-1,w2p['Amount'])
     tdf = w2p.groupby('Agent').sum()
     tdf['Final Balance'] = tdf.Amount.sum()/4
@@ -85,7 +81,7 @@ app.layout = html.Div(
                 html.Div(
                     className="four columns div-user-controls",
                     children=[
-                        html.Img(className="logo", src="https://raw.githubusercontent.com/trossco84/bettingatwork/main/assets/logo2.jpg?token=ANKCCE7FDCKTMUEVKVX4S4DAM5FOC"),
+                        html.Img(className="logo", src="https://raw.githubusercontent.com/trossco84/bettingatwork/main/assets/logo2.jpg"),
                         html.H2("Agent Dashboard for Betting at Work"),
                         html.P("Weeks:"),
                         html.Div(
@@ -247,7 +243,7 @@ def update_tables(wf1,weekfilter,agentfilter):
     wtdata = week_totals[week_totals.Week == weekfilter].groupby('Agent').sum().reset_index()
     TotalsTable_data = wtdata.to_dict('records')
     try:
-        agent_data = pd.read_csv(f'/Users/trevorross/Desktop/My Projects/agent_dashboard_dev/weekly_outputs/{weekfilter}.csv')
+        agent_data = pd.read_csv(f'https://raw.githubusercontent.com/trossco84/bettingatwork/main/weekly_outputs/{weekfilter}.csv')
         agent_data = agent_data.sort_values(by='Agent')
         agent_data = agent_data[['Agent','Action','Name','Amount']]
         if agentfilter=="All":
