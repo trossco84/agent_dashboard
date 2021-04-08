@@ -48,7 +48,24 @@ def process_interbookie(ww2):
             td2.iloc[0,2] = td2.iloc[0,2] + amt
             td2.iloc[3,2] = td2.iloc[3,2] - amt
             td2 = td2.sort_values('Demand')
-    
+   
+#christian logic
+    w3 = w2p
+    c_accts = ['pyr118','pyr123']
+    c_bal = 0
+    if set(list(w3.Player)).isdisjoint(set(c_accts)) == False:
+        for acct in c_accts:
+            if acct in list(w3.Player):
+                weekly = w3.set_index('Player').loc[acct].Amount
+                if weekly > 0:
+                    add = weekly * 0.1
+                    c_bal = c_bal+add
+
+    c_bal = int(abs(c_bal))
+    if c_bal%4 >1:
+        c_bal = c_bal + 1
+    c_logic = f'we each pay christian {int(c_bal/4)}'
+    output_list.append(c_logic)
     return output_list,weekly_balance
 
 last_payments,idc = process_interbookie(last_week)
