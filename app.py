@@ -9,14 +9,6 @@ import dash_table as dtable
 import dash_auth
 
 #authorization
-agent_auths = {
-    'Dro':'ecuador69',
-    'Gabe':'gerbderb69',
-    'Orso':'bearclaw69',
-    'Trev':'boomer69',
-    'Admin':'betatwork',
-    'xpyragt-a':'Cooper.777'
-}
 
 #create data
 week_totals = pd.read_csv('https://raw.githubusercontent.com/trossco84/bettingatwork/main/raw_archives.csv')
@@ -91,10 +83,6 @@ external_stylesheets = [
 ]
 
 app = dash.Dash( __name__, meta_tags=[{"name": "viewport", "content": "width=device-width"}])
-auth = dash_auth.BasicAuth(
-    app,
-    agent_auths
-)
 server = app.server
 
 app.title= 'Agent Dashboard'
