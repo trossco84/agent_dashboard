@@ -6,6 +6,17 @@ import numpy as np
 from dash.dependencies import Input,Output
 import plotly.express as px
 import dash_table as dtable
+import dash_auth
+
+#authorization
+agent_auths = {
+    'Dro':'ecuador69',
+    'Gabe':'gerbderb69',
+    'Orso':'bearclaw69',
+    'Trev':'boomer69',
+    'Admin':'betatwork',
+    'xpyragt-a':'Cooper.777'
+}
 
 #create data
 week_totals = pd.read_csv('https://raw.githubusercontent.com/trossco84/bettingatwork/main/raw_archives.csv')
@@ -22,7 +33,7 @@ agent_columns.pop(1)
 
 available_weeks = [{"label":x,"value":x} for x in a_weeks]
 
-
+#interbookie rapid optimization
 def process_interbookie(ww2):
     #creates data frame for optimization
     w2p = pd.read_csv(f'https://raw.githubusercontent.com/trossco84/bettingatwork/main/weekly_outputs/{ww2}.csv')
@@ -80,6 +91,10 @@ external_stylesheets = [
 ]
 
 app = dash.Dash( __name__, meta_tags=[{"name": "viewport", "content": "width=device-width"}])
+auth = dash_auth.BasicAuth(
+    app,
+    agent_auths
+)
 server = app.server
 
 app.title= 'Agent Dashboard'
