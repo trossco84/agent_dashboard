@@ -6,7 +6,7 @@ import numpy as np
 from dash.dependencies import Input,Output
 import plotly.express as px
 import dash_table as dtable
-import dash_auth
+# import dash_auth
 
 #authorization
 
