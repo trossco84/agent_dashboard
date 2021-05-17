@@ -53,7 +53,7 @@ def process_interbookie(ww2):
             td2.iloc[3,2] = td2.iloc[3,2] - amt
             td2 = td2.sort_values('Demand')
         
-        if td2.Demand.all() < 1:
+        if ((td2.Demand < 1).all()):
             break
    
 #christian logic
