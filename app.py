@@ -36,6 +36,7 @@ def process_interbookie(ww2):
 
     #optimization
     tdf['Demand'] = [tdf.iloc[x]['Final Balance']-tdf.iloc[x].Amount for x in tdf.reset_index().index]
+    tdf.Demand = tdf.Demand.round(decimals=2)
     td2 = tdf.sort_values('Demand')
     output_list = []
     while td2.Demand.any() != 0.0:
@@ -51,6 +52,9 @@ def process_interbookie(ww2):
             td2.iloc[0,2] = td2.iloc[0,2] + amt
             td2.iloc[3,2] = td2.iloc[3,2] - amt
             td2 = td2.sort_values('Demand')
+        
+        if td2.Demand.all() < 1:
+            break
    
 #christian logic
     w3 = w2p
